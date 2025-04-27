@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>小宝宝生日快乐！</title>
+
+  <link rel="stylesheet" href="css/normalizel.css">
+
+  <link rel="stylesheet" href="css/stylel.css" media="screen" type="text/css" />
+</head>
+
+<body>
+<canvas class="canvas"></canvas>
+
+<span id="countdown"></span>
+
+<div class="help">?</div>
+
+<div class="ui">
+  <input class="ui-input" type="text" />
+  <span class="ui-return">↵</span>
+</div>
+
+<div class="overlay">
+  <div class="tabs">
+    <div class="tabs-labels"><span class="tabs-label">M</span><span class="tabs-label">E</span><span class="tabs-label">X</span></div>
+
+    <div class="tabs-panels">
+      <ul class="tabs-panel commands">
+        <li class="commands-item"><span class="commands-item-title">Text</span><span class="commands-item-info" data-demo="Hello :)">Type anything</span><span class="commands-item-action">Demo</span></li>
+        <li class="commands-item"><span class="commands-item-title">Countdown</span><span class="commands-item-info" data-demo="#countdown 10">#countdown<span class="commands-item-mode">number</span></span><span class="commands-item-action">Demo</span></li>
+        <li class="commands-item"><span class="commands-item-title">Time</span><span class="commands-item-info" data-demo="#time">#time</span><span class="commands-item-action">Demo</span></li>
+        <li class="commands-item"><span class="commands-item-title">Rectangle</span><span class="commands-item-info" data-demo="#rectangle 30x15">#rectangle<span class="commands-item-mode">width x height</span></span><span class="commands-item-action">Demo</span></li>
+        <li class="commands-item"><span class="commands-item-title">Circle</span><span class="commands-item-info" data-demo="#circle 25">#circle<span class="commands-item-mode">diameter</span></span><span class="commands-item-action">Demo</span></li>
+
+        <li class="commands-item commands-item--gap"><span class="commands-item-title">Animate</span><span class="commands-item-info" data-demo="The time is|#time|#countdown 3|#icon thumbs-up"><span class="commands-item-mode">command1</span>&nbsp;|<span class="commands-item-mode">command2</span></span><span class="commands-item-action">Demo</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!--<div id="message-container" class="centered">-->
+<!--&lt;!&ndash;  <div id="message">点击<a href="./BirthdayCake.html">here</a>有惊喜</div>&ndash;&gt;-->
+<!--</div>-->
+
+<a href="./BirthdayCake.htm" class="bottom-center" id="fade-in-image">
+  <img src="img/link.jpg" alt="Clickable Image">
+</a>
+<script>
+  // 在页面加载后10秒，执行图片淡入效果
+  window.onload = function() {
+    setTimeout(function() {
+      var imageElement = document.getElementById('fade-in-image');
+      imageElement.style.opacity = 1;
+    }, 9000); // 10000毫秒 = 10秒
+  };
+</script>
+
+
+  <script src="js/indexl.js"></script>
+<!--<audio src="../music/1.ogg" autoplay="autoplay"></audio>-->
+</body>
+
+
+
+<style>
+  #div_play_button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 60px;/*播放按钮大小*/
+    height: 60px;/*播放按钮大小*/
+    background-color: rgba(177, 213, 243, 0);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    animation-name: rotateAnimation;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+    z-index:999;
+  }
+
+  #div_play_button.playing {
+    animation-play-state: running;
+  }
+
+  /*播放按钮大小*/
+  #div_play_button img {
+    width: 60px;
+    height: 60px;
+  }
+
+  @keyframes rotateAnimation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<div id="div_play_button" onclick="toggleAudio()">
+   <img id="play_button_img" src="img/play_button.png" alt="播放按钮">
+</div>
+
+<audio id="audio_music" data-id="audio_music" autoplay="autoplay" preload="auto" loop>
+  <source src="https://music.163.com/song/media/outer/url?id=2088198840.mp3" type="audio/mpeg" />
+  <embed hidden="true" autostart="true" height="0" width=0 loop="true" src="https://music.163.com/song/media/outer/url?id=2088198840.mp3" autoplay="autoplay"/>
+</audio>
+
+<script>
+  var audio = document.getElementById("audio_music");
+  var playButtonDiv = document.getElementById("div_play_button");
+  var playButtonImg = document.getElementById("play_button_img");
+
+  function toggleAudio() {
+    if (audio.paused) {
+      audio.play();
+      playButtonDiv.classList.add("playing");
+      playButtonImg.src = "img/pause_button.png";
+    } else {
+      audio.pause();
+      playButtonDiv.classList.remove("playing");
+      playButtonImg.src = "img/play_button.png";
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", function() {
+    audio.addEventListener("play", function() {
+      playButtonDiv.classList.add("playing");
+    });
+
+    audio.addEventListener("pause", function() {
+      playButtonDiv.classList.remove("playing");
+    });
+
+    audio.addEventListener("loadedmetadata", function() {
+      if (!audio.paused) {
+        playButtonDiv.classList.add("playing");
+      }
+      audio.currentTime = 0;
+    });
+  });
+</script>
+
+</html>
